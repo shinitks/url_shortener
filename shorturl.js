@@ -22,6 +22,23 @@ function generateShortURL() {
     return shortURL;
 }
 
+let lastCheckedDate = new Date().toDateString(); 
+
+function trackDateChange() {
+    const currentDate = new Date().toDateString();  
+    if (currentDate !== lastCheckedDate) {
+        const urls=geturls();
+        for(let i=0;i<urls.length;i++){
+            urls[i].count=0;
+        }
+        fs.writeFileSync('./data/shorturl.json', JSON.stringify(urls, null, 2)); 
+
+        lastCheckedDate = currentDate;  
+    } 
+}
+
+setInterval(trackDateChange, 24 * 60 * 60 * 1000);
+
 app.use(express.json());
 
 app.get('/about', (req, res) => {
@@ -108,7 +125,7 @@ app.get('/top/:number', (req, res) => {
 
     const urls = geturls();
 
-    urls.sort((a, b) => a.count - b.count);
+    urls.sort((a, b) => b.count - a.count);
 
     const result = urls.slice(0, number);
 

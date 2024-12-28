@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "count": 1,
+    "count": 2,
     "originalurl": "https://www.example.com",
     "shorturl": "abc123"
   },
@@ -26,7 +26,13 @@
   {
     "id": 5,
     "shorturl": "DpLPup",
-    "count": 0,
+    "count": 1,
     "originalurl": "https//127.0.0.1:3000/abcdefghi"
+  },
+  {
+    "id": 6,
+    "shorturl": "XIjmqP",
+    "count": 6,
+    "originalurl": "https//127.0.0.1:3000/kloputgfr"
   }
 ]
