@@ -1,7 +1,7 @@
 [
   {
     "id": 1,
-    "count": 2,
+    "count": 1,
     "originalurl": "https://www.example.com",
     "shorturl": "abc123"
   },
@@ -14,25 +14,13 @@
   {
     "id": 3,
     "count": 0,
-    "originalurl": "http://127.0.0.1:3000/about",
+    "originalurl": "http://localhost:3000/about",
     "shorturl": "jkl123"
   },
   {
     "id": 4,
     "count": 0,
     "shorturl": "dZcZyD",
-    "originalurl": "https//127.0.0.1:3000/dfghijkllo"
-  },
-  {
-    "id": 5,
-    "shorturl": "DpLPup",
-    "count": 1,
-    "originalurl": "https//127.0.0.1:3000/abcdefghi"
-  },
-  {
-    "id": 6,
-    "shorturl": "XIjmqP",
-    "count": 6,
-    "originalurl": "https//127.0.0.1:3000/kloputgfr"
+    "originalurl": "http://localhost:3000/dfghijkllo"
   }
 ]

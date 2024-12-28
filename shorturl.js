@@ -70,10 +70,41 @@ app.post('/', (req, res) => {
                 return res.status(500).send('Error saving data');
             }
 
-            res.send(newshort); 
+            res.json({ shorturl: `http://localhost:3000/${newshort}` });
         });
     }
 });
+
+app.get('/details', (req, res) => {
+
+    const url = req.query.url ? req.query.url.trim().toLowerCase() : '';
+
+    if (!url) {
+        return res.status(400).send('ERROR: Missing "url" query parameter');
+    }
+
+    console.log('Received URL:', url);
+
+    const urls = geturls();
+    let ans;
+
+    if (url.length > 6) {
+        ans = urls.find(m => m.originalurl.trim().toLowerCase() === url);
+        if (ans) {
+            res.send(ans.shorturl ? `http://localhost:3000/${ans.shorturl}` : ans.count.toString());
+        } else {
+            res.status(404).send('ERROR: Original URL not found');
+        }
+    } else {
+        ans = urls.find(m => m.shorturl.trim().toLowerCase() === url);
+        if (ans) {
+            res.send(ans.count.toString());
+        } else {
+            res.status(404).send('ERROR: Short URL not found');
+        }
+    }
+});
+
 
 app.get('/:shorturl', (req, res) => {
     const short = req.params.shorturl.trim();  
@@ -91,34 +122,15 @@ app.get('/:shorturl', (req, res) => {
             res.redirect('https://www.google.com');  
         } else {
             fs.writeFileSync('./data/shorturl.json', JSON.stringify(urls, null, 2));
-            res.redirect(ans.originalurl);  
+            res.redirect('https://advertising.amazon.com');  
         }
     } else {
-        res.status(404).send('ERROR: 404 - Short URL not found');
+        res.status(404).send('ERROR: 404 - Short URL found');
     }
 });
 
-app.get('/details/:url', (req, res) => {
-    const url = req.params.url.trim();  
-    const urls = geturls();  
 
-    let ans;
-    if (url.length > 6) {
-        ans = urls.find(m => m.originalurl.toLowerCase() === url.toLowerCase());
-        if (ans) {
-            res.send(ans.shorturl ? ans.shorturl : ans.count.toString());  
-        } else {
-            res.status(404).send('ERROR: Original URL not found');
-        }
-    } else {
-        ans = urls.find(m => m.shorturl.toLowerCase() === url.toLowerCase());
-        if (ans) {
-            res.send(ans.count.toString());  
-        } else {
-            res.status(404).send('ERROR: Short URL not found');
-        }
-    }
-});
+
 
 app.get('/top/:number', (req, res) => {
     const number = parseInt(req.params.number, 10);
@@ -132,7 +144,7 @@ app.get('/top/:number', (req, res) => {
     res.json(result);
 });
 
-const port = 3000;
+const port = 8000;
 app.listen(port, () => {
-    console.log('Server started on http://localhost:3000');
+    console.log('Server started on http://localhost:8000');
 });
