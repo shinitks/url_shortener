@@ -103,18 +103,17 @@ app.get('/details/:url', (req, res) => {
     }
 });
 
-app.get('/top/:number',(req,res)=>{
-    const urls=geturls();
-    let max=0;
-    for (let i = 0; i < urls.length; i++) {
-        if (max < urls[i].count) {
-            max = urls[i].count;  
-        }
-    }
+app.get('/top/:number', (req, res) => {
+    const number = parseInt(req.params.number, 10);
 
-    res.send(max);
+    const urls = geturls();
 
-})
+    urls.sort((a, b) => a.count - b.count);
+
+    const result = urls.slice(0, number);
+
+    res.json(result);
+});
 
 const port = 3000;
 app.listen(port, () => {
