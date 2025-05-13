@@ -37,11 +37,11 @@ git clone https://github.com/shinitks/url_shortener
 
 ## **🚀 API Endpoints**
 
-POST /
+✦ POST /
 
 Shortens a long URL.
 
-GET /:shorturl
+✦ GET /:shorturl
 
 Redirects to:
 
@@ -51,19 +51,15 @@ Advertisement (on the 10th hit)
 
 Shows "Limit exceeded" after 20 hits/day
 
-GET /details?url=VALUE
+✦ GET /details?url=VALUE
 
 If url is a long URL: returns its corresponding short URL.
 
 If url is a short URL: returns its hit count.
 
-GET /top/:number
+✦ GET /top/:number
 
 Returns the top N most visited URLs.
-
-Example:
-
-GET /top/3 → returns top 3 most visited shortened links.
 
 ## 🛠 Tech Stack
 
